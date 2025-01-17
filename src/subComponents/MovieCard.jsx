@@ -1,7 +1,11 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { increment, decrement } from '../movieSlice';
 
 // MovieCard Component
 const MovieCard = ({ title, rating, poster }) => {
+    const count = useSelector((state) => state.movie.value);
+    const dispatch = useDispatch();
   return (
     <div
       style={{
@@ -9,7 +13,7 @@ const MovieCard = ({ title, rating, poster }) => {
         margin: '10px',
         padding: '10px',
         backgroundColor: '#1e1e1e',
-        color: '#fff',
+        color: 'white',
         borderRadius: '8px',
         textAlign: 'center',
       }}
@@ -23,8 +27,10 @@ const MovieCard = ({ title, rating, poster }) => {
           marginBottom: '10px',
         }}
       />
-      <h3 style={{ fontSize: '16px', marginBottom: '5px' }}>{title}</h3>
+      <h3 style={{ fontSize: '16px', marginBottom: '5px'}}>{title}</h3>
       <p style={{ fontSize: '14px' }}>Rating: {rating}</p>
     </div>
   );
 };
+
+export default MovieCard;
