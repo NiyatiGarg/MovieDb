@@ -7,10 +7,10 @@ const Header = ({  searchTerm, setSearchTerm, activeTab, onTabChange }) => {
         style={{
           justifyContent: 'space-between',
           alignItems: 'center',
-          backgroundColor: '#2e2e2e',
           color: '#fff',
           paddingLeft: '5rem',
-          paddingRight: '5rem'
+          paddingRight: '5rem',
+          background: '#33393F',
         }}
         className='py-4 d-flex'
       >

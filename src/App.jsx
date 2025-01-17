@@ -4,12 +4,14 @@ import Header from './subComponents/Header';
 import MoviesList from './subComponents/MoviesList';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { GrCaretPrevious } from "react-icons/gr";
+import { GrCaretNext } from "react-icons/gr";
 
 const API_KEY = 'c45a857c193f6302f2b5061c3b85e743';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
-const App = () => {
+const App = React.memo(() => {
   const [searchTerm, setSearchTerm] = useState('');
   const [allMovies, setAllMovies] = useState([]); // Store all movies fetched
   const [movies, setMovies] = useState([]); // Paginated movies
@@ -67,7 +69,7 @@ const App = () => {
       console.error('Failed to fetch search results:', error);
     }
   };
-  
+
   // Paginate movies
   const paginateMovies = () => {
     const startIndex = (currentPage - 1) * moviesPerPage;
@@ -105,7 +107,7 @@ const App = () => {
   }, [activeTab, searchTerm]);
 
   return (
-    <div>
+    <div style={{ width: '100vw', height: '100vh', background: 'rgb(135, 147, 159)', overflow :'scroll'}}>
       <Header
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
@@ -115,45 +117,52 @@ const App = () => {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <>
+        <div 
+        className='py-5'
+        style={{margin: '0 5rem', }}
+        >
           <MoviesList
             movies={movies.map((movie) => ({
               ...movie,
               poster: `${IMAGE_BASE_URL}${movie.poster_path}`,
             }))}
           />
-          {/* Pagination Controls */}
+          {/* Pagination Controller */}
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: '2rem',
+              margin: '2rem 0 0 0',
               gap: '1rem',
             }}
+            className='d-flex justify-content-end align-items-center' 
           >
-            <button
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="btn btn-primary"
-            >
-              Previous
-            </button>
+            
             <span style={{ fontSize: '1.2rem' }}>
               Page {currentPage} of {Math.ceil(allMovies.length / moviesPerPage)}
             </span>
             <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="py-1 px-2"
+              style={{background: 'white', borderRadius: '5px'}}
+
+            >
+              {/* Previous */}
+              <GrCaretPrevious />
+            </button>
+            <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === Math.ceil(allMovies.length / moviesPerPage)}
-              className="btn btn-primary"
+               className="py-1 px-2"
+              style={{background: 'white', borderRadius: '5px'}}
             >
-              Next
+              {/* Next */}
+              <GrCaretNext />
             </button>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
-};
+});
 
 export default App;
