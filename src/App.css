@@ -41,6 +41,16 @@
   color: #888;
 }
 
+.tab:hover{
+color: white
+}
+
 .activeTab{
-  border-bottom: 2px solid lightgrey;
+  /* border-bottom: 2px solid grey; */
+  background: #87939F;
+  color: white;
+}
+.activeTab:hover{
+  /* border-bottom: 2px solid grey; */
+  color: white;
 }

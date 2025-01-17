@@ -1,17 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const movieSlice = createSlice({
-  name: 'movie',
-  initialState: { value: 0 },
+  name: "movie",
+  initialState: {
+    popular: [],
+    topRated: [],
+    upcoming: [],
+    activeTab: 'popular',
+  },
   reducers: {
-    increment: (state) => {
-      state.value += 1;
+    setMovies: (state, { payload }) => {
+      return { ...state, [payload.activeTab]: payload.movies || [] };
     },
-    decrement: (state) => {
-      state.value -= 1;
-    },
+    setActiveTab: (state, { payload }) => {
+        state.activeTab = payload;
+    }
   },
 });
 
-export const { increment, decrement } = movieSlice.actions;
+export const { setMovies, setActiveTab } = movieSlice.actions;
 export default movieSlice.reducer;
