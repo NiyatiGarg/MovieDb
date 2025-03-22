@@ -4,7 +4,6 @@ A responsive and feature-rich movie browser app built using **React.js** and the
 
 Explore popular, top-rated, and upcoming movies, perform searches, and view detailed movie information — all in one clean, user-friendly interface.
 
----
 
 ## 🚀 Features
 
